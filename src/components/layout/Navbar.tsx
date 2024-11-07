@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Wallet, X, ExternalLink, LogOut, Settings } from 'lucide-react';
+import ConnectButton from '../ConnectButton';
 
 interface NavbarProps {
   className?: string;
@@ -47,7 +48,7 @@ const Navbar = ({ className = '' }: NavbarProps) => {
                 <div className="absolute inset-0 w-0 bg-white transition-all duration-300 ease-out group-hover:w-full opacity-10"></div>
                 <div className="flex items-center space-x-2">
                   <Wallet className="h-5 w-5" />
-                  <span>Connect Wallet</span>
+                  <ConnectButton/>
                 </div>
               </button>
             ) : (
