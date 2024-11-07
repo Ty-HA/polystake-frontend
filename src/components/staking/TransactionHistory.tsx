@@ -1,16 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowUpCircle, ArrowDownCircle, Clock, Search, Filter, Calendar, SlidersHorizontal } from 'lucide-react';
+import { ArrowUpCircle, ArrowDownCircle, Clock, Search, SlidersHorizontal } from 'lucide-react';
+import type { Transaction } from '@/types/staking';
 
-interface Transaction {
-    id: string;
-    type: 'stake' | 'unstake' | 'claim';
-    asset: 'ETH' | 'BTC';
-    amount: string;
-    status: 'completed' | 'pending' | 'failed';
-    timestamp: string;
-    hash: string;
+interface TransactionHistoryProps {
+    transactions: Transaction[];
 }
 
 interface TransactionHistoryProps {

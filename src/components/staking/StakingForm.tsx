@@ -32,7 +32,7 @@ const StakingForm: React.FC<StakingFormProps> = ({ onSubmit, isLoading }) => {
                             ...formData,
                             cryptoType: e.target.value as 'ETH' | 'BTC'
                         })}
-                        className="w-full p-3 bg-zinc-800 border border-yellow-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
+                        className="w-full p-3 bg-zinc-800 border border-yellow-800 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
                     >
                         <option value="ETH">Ethereum (ETH)</option>
                         <option value="BTC">Bitcoin (BTC)</option>

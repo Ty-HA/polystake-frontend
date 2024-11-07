@@ -1,12 +1,4 @@
-export interface StakingTransaction {
-    id: number;
-    type: 'ETH' | 'BTC';
-    amount: string;
-    status: 'active' | 'pending' | 'completed';
-    apy: string;
-    date: string;
-    rewards: string;
-}
+// src/types/staking.ts
 
 export interface StakingStats {
     totalStaked: {
@@ -30,7 +22,7 @@ export interface StakingFormData {
 
 export interface UserStakingData {
     address: string;
-    transactions: StakingTransaction[];
+    transactions: Transaction[];
     stats: StakingStats;
 }
 
@@ -39,8 +31,8 @@ export interface StakingConstants {
         ETH: string;
         BTC: string;
     };
-    unlockPeriod: number; // in days
-    rewardDistributionInterval: number; // in days
+    unlockPeriod: number;
+    rewardDistributionInterval: number;
     maxStakeAmount: {
         ETH: string;
         BTC: string;
@@ -48,3 +40,13 @@ export interface StakingConstants {
 }
 
 export type StakingStatus = 'active' | 'pending' | 'completed';
+
+export interface Transaction {
+    id: string;
+    type: "stake" | "claim" | "unstake";
+    asset: "ETH" | "BTC"; 
+    amount: string;
+    status: "completed" | "pending" | "failed";
+    timestamp: string;
+    hash: string;
+}

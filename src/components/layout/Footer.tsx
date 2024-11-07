@@ -5,7 +5,7 @@ import { Github, X, Disc, Globe } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-zinc-800">
+    <footer className="bg-black border-t border-yellow-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -108,7 +108,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-zinc-800 mt-12 pt-8">
+        <div className="border-t border-yellow-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-zinc-400 text-sm text-center md:text-left">
               © {new Date().getFullYear()} PolyStake. All rights reserved.
