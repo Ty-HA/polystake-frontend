@@ -18,6 +18,7 @@ https://github.com/EmanHerawy/PolyStake
 * **TOMO Wallet** - Multi-chain support for BTC and ETH
 * Support for ETH, BTC, and Polygon networks
 * **AltLayer** - decentralized protocol that facilitates the launch of native and restaked rollups with both optimistic and zk rollup stacks.
+* **Babylon Labs**
 
 ## Prerequisites
 
