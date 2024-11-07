@@ -106,7 +106,7 @@ https://polystake-frontend.vercel.app/
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/bthasystem)
+Your Name - [@BthaSystem](https://twitter.com/bthasystem)
 
 Project Link: [https://github.com/Ty-HA/polystake-frontend](https://github.com/Ty-HA/polystake-frontend)
 
