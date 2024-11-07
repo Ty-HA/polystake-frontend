@@ -10,6 +10,9 @@ A modern and intuitive staking platform, enabling users to manage their crypto a
 * **Tailwind CSS** - Utility-first CSS framework
 * **P2P** - Blockchain transaction fetching integration
 
+## Backend
+https://github.com/EmanHerawy/PolyStake
+
 ### Wallets & Blockchain
 * **MetaMask** - Ethereum and ERC20 tokens wallet
 * **TOMO Wallet** - Multi-chain support for BTC and ETH
