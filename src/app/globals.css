@@ -121,7 +121,7 @@ body::before {
 /* Effet de glassmorphism pour les cards */
 @layer components {
   .glass-card {
-    @apply bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/50;
+    @apply bg-zinc-900/90 backdrop-blur-xl border border-yellow-800;
   }
 }
 

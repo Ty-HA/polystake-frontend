@@ -6,13 +6,9 @@ import type { Transaction } from '@/types/staking';
 
 interface TransactionHistoryProps {
     transactions: Transaction[];
+    className?: string;
 }
-
-interface TransactionHistoryProps {
-    transactions: Transaction[];
-}
-
-const TransactionHistory: React.FC<TransactionHistoryProps> = ({ transactions }) => {
+const TransactionHistory = ({ transactions, className = '' }: TransactionHistoryProps) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterAsset, setFilterAsset] = useState<'ALL' | 'ETH' | 'BTC'>('ALL');
     const [filterType, setFilterType] = useState<'ALL' | 'stake' | 'unstake' | 'claim'>('ALL');
@@ -72,6 +68,8 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ transactions })
     };
 
     return (
+        <div className={className}>
+            <div className="p-6">
         <div className="bg-zinc-900 rounded-2xl border border-yellow-800 p-6">
             {/* Header with main filters */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
@@ -251,6 +249,8 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ transactions })
                 </div>
             )}
         </div>
+    </div>
+</div>
     );
 };
 

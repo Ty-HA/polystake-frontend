@@ -5,13 +5,13 @@ import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/Alert';
 import RewardsCard from './RewardsCard';
 import TransactionHistory from './TransactionHistory';
-import type { Transaction } from '@/types/staking';
+import type { Transaction, RewardStats } from '@/types/staking';
 
 const StakingInterface = () => {
   const [selectedCrypto, setSelectedCrypto] = useState('ETH');
   const [amount, setAmount] = useState('');
 
-  const demoRewardStats = {
+  const demoRewardStats: RewardStats = {
     available: {
       ETH: "0.125",
       BTC: "0.0025"
@@ -170,17 +170,17 @@ const StakingInterface = () => {
         <RewardsCard 
           stats={demoRewardStats}
           onClaimRewards={handleClaimRewards}
-          className="bg-black/40 backdrop-blur-xl border border-orange-500/20 shadow-xl shadow-orange-900/10"
+          className="bg-black/40 backdrop-blur-xl border border-yellow-800 shadow-xl shadow-orange-900/10"
         />
 
         {/* Transaction History */}
         <TransactionHistory 
           transactions={demoTransactions}
-          className="bg-black/40 backdrop-blur-xl border border-orange-500/20 shadow-xl shadow-orange-900/10"
+          className="bg-black/40 backdrop-blur-xl border border-yellow-800 shadow-xl shadow-orange-900/10"
         />
 
         {/* Info Alert */}
-        <Alert className="bg-black/40 backdrop-blur-xl border border-orange-500/20">
+        <Alert className="bg-black/40 backdrop-blur-xl border border-yellow-800">
           <AlertCircle className="h-4 w-4 text-orange-400" />
           <AlertTitle className="text-zinc-200">Important Information</AlertTitle>
           <AlertDescription className="text-zinc-400">

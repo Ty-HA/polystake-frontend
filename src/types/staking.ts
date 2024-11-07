@@ -41,12 +41,29 @@ export interface StakingConstants {
 
 export type StakingStatus = 'active' | 'pending' | 'completed';
 
-export interface Transaction {
+
+export type Transaction = {
     id: string;
     type: "stake" | "claim" | "unstake";
-    asset: "ETH" | "BTC"; 
+    asset: "ETH" | "BTC";
     amount: string;
     status: "completed" | "pending" | "failed";
     timestamp: string;
     hash: string;
+}
+
+export type RewardStats = {
+    available: {
+        ETH: string;
+        BTC: string;
+    };
+    pending: {
+        ETH: string;
+        BTC: string;
+    };
+    nextReward: string;
+    totalClaimed: {
+        ETH: string;
+        BTC: string;
+    };
 }
