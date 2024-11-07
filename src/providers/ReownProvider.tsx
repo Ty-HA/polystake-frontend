@@ -43,7 +43,8 @@ export const appKit = createAppKit({
   defaultNetwork: arbitrumSepolia,
   metadata,
   features: {
-    analytics: true
+    analytics: true,
+    socials:[]
   },
   
 })

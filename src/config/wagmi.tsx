@@ -3,8 +3,7 @@ import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { defineChain, arbitrumSepolia } from '@reown/appkit/networks'
 import { createAppKit } from '@reown/appkit/react'
 import { http } from 'viem'
-
-
+import 'dotenv/config'
 
 // Définition de la chaîne Babyty
 export const babyty = defineChain({

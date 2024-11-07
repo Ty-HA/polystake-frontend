@@ -160,6 +160,12 @@ const StakingInterface = () => {
                     <span className="text-zinc-400">Unlock Period</span>
                     <span className="font-medium text-orange-300">7 days</span>
                   </div>
+                  <div className="flex justify-between">
+                    <span className="text-zinc-400">Total staked</span>
+                    <span className="font-medium text-orange-300">
+                      {selectedCrypto === 'ETH' ? '0.1 ETH' : '0.01 BTC'}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
