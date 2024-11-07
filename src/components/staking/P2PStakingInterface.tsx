@@ -1,151 +1,155 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
-import P2PStakingForm from './P2PStakingForm';
-import { ArrowUpCircle, ArrowLeft, Coins, Clock } from 'lucide-react';
-import { p2pService } from '@/services/p2pService';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { AlertCircle, CheckCircle, Search } from 'lucide-react';
 
-interface StakingStats {
-  totalStaked: string;
-  rewards: string;
-  apr: string;
-  stakingPeriod: number;
+interface TestResult {
+  test: string;
+  status: 'success' | 'error';
+  data?: unknown;
+  error?: string;
 }
 
 const P2PStakingInterface: React.FC = () => {
-  const router = useRouter();
-  const { address, isConnected } = useAccount();
-  const [loading, setLoading] = useState(true);
-  const [selectedCrypto, setSelectedCrypto] = useState<'ETH' | 'BTC'>('ETH');
-  const [stakingStats, setStakingStats] = useState<StakingStats>({
-    totalStaked: '0',
-    rewards: '0',
-    apr: '5.5',
-    stakingPeriod: 0
-  });
+  const [loading, setLoading] = useState(false);
+  const [testResults, setTestResults] = useState<TestResult[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [address, setAddress] = useState('tb1p892ery2yya5yejwvgrp3cru4n7yz0twx7y5gm2f6pq9rvjsgjnjsasz0s9');
 
-  useEffect(() => {
-    const fetchStakingData = async () => {
-      if (!isConnected || !address) {
-        setLoading(false);
-        return;
+  const API_CONFIG = {
+    BASE_URL: 'https://api-test-holesky.p2p.org/testnet',
+    BEARER_TOKEN: process.env.NEXT_PUBLIC_P2P_BEARER_TOKEN
+  };
+
+  const runTest = async () => {
+    if (!address.trim()) {
+      setError('Please enter a BTC address');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setTestResults([]);
+
+    try {
+      const response = await fetch(
+        `${API_CONFIG.BASE_URL}/transaction/get-by-address/${address}`,
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${API_CONFIG.BEARER_TOKEN}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const data = await response.json();
       
-      try {
-        const stakingInfo = await p2pService.getStakingInfo(address);
-        setStakingStats(stakingInfo);
-      } catch (error) {
-        console.error('Error fetching staking data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStakingData();
-  }, [address, isConnected]);
+      setTestResults([{
+        test: 'Get Transactions by Address',
+        status: 'success',
+        data: data
+      }]);
+    } catch (err) {
+      setTestResults([{
+        test: 'Get Transactions by Address',
+        status: 'error',
+        error: err instanceof Error ? err.message : 'An unknown error occurred'
+      }]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      {/* Back Button */}
-      <button
-        onClick={() => router.push('/')}
-        className="flex items-center gap-2 text-zinc-400 hover:text-orange-400 transition-colors"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Dashboard
-      </button>
-
-      {/* En-tête P2P */}
-      <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-orange-500/20 p-6">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-3">
-            <Coins className="h-8 w-8 text-orange-500" />
-            <div>
-              <h2 className="text-2xl font-bold text-white">P2P.org Staking</h2>
-              <p className="text-zinc-400">Professional Staking Services</p>
-            </div>
-          </div>
-          <div className="px-4 py-2 bg-orange-500/10 rounded-full">
-            <span className="text-orange-400">Current APR: {stakingStats.apr}%</span>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="p-6 space-y-4 bg-black/40 backdrop-blur-xl rounded-2xl border border-orange-500/20">
+        <h2 className="text-xl font-bold text-orange-400 flex items-center gap-2">
+          <Search className="w-6 h-6" />
+          P2P Transaction Lookup
+        </h2>
+        
+        <div className="bg-black/20 p-4 rounded-lg">
+          <h3 className="font-medium mb-2 text-yellow-800">Configuration Status</h3>
+          <div className="flex items-center gap-2 text-white">
+            <div className={`w-2 h-2 rounded-full ${API_CONFIG.BEARER_TOKEN ? 'bg-green-500' : 'bg-red-500'}`} />
+            Bearer Token: {API_CONFIG.BEARER_TOKEN ? 'Configured' : 'Missing'}
           </div>
         </div>
-
-        {/* Crypto Selector */}
-        <div className="flex gap-2 mb-6">
-          <button
-            onClick={() => setSelectedCrypto('ETH')}
-            className={`px-4 py-2 rounded-lg transition-all ${
-              selectedCrypto === 'ETH'
-                ? 'bg-orange-500 text-white'
-                : 'bg-black/40 text-zinc-400 hover:text-white'
-            }`}
-          >
-            Ethereum
-          </button>
-          <button
-            onClick={() => setSelectedCrypto('BTC')}
-            className={`px-4 py-2 rounded-lg transition-all ${
-              selectedCrypto === 'BTC'
-                ? 'bg-orange-500 text-white'
-                : 'bg-black/40 text-zinc-400 hover:text-white'
-            }`}
-          >
-            Bitcoin
-          </button>
+        
+        <div className="space-y-2">
+          <label htmlFor="address" className="block text-sm font-medium text-zinc-400">
+            Address
+          </label>
+          <input
+            id="address"
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="text-yellow-800 w-full p-3 bg-black/50 border border-orange-500/20 rounded-lg text-sm"
+            placeholder="Enter address"
+          />
         </div>
+        
+        <button 
+          onClick={runTest}
+          disabled={loading}
+          className="w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          {loading ? (
+            'Looking up transactions...'
+          ) : (
+            <>
+              Lookup Transactions
+              <Search className="w-4 h-4" />
+            </>
+          )}
+        </button>
 
-        {isConnected && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="bg-black/30 p-4 rounded-lg border border-orange-500/10">
-              <div className="flex items-center gap-2 text-zinc-400 mb-2">
-                <ArrowUpCircle className="h-4 w-4" />
-                <span>Total Staked</span>
-              </div>
-              <p className="text-2xl font-bold text-white">
-                {loading ? 'Loading...' : `${stakingStats.totalStaked} ${selectedCrypto}`}
-              </p>
-            </div>
-
-            <div className="bg-black/30 p-4 rounded-lg border border-orange-500/10">
-              <div className="flex items-center gap-2 text-zinc-400 mb-2">
-                <Coins className="h-4 w-4" />
-                <span>Total Rewards</span>
-              </div>
-              <p className="text-2xl font-bold text-orange-400">
-                {loading ? 'Loading...' : `${stakingStats.rewards} ${selectedCrypto}`}
-              </p>
-            </div>
-
-            <div className="bg-black/30 p-4 rounded-lg border border-orange-500/10">
-              <div className="flex items-center gap-2 text-zinc-400 mb-2">
-                <Clock className="h-4 w-4" />
-                <span>Staking Period</span>
-              </div>
-              <p className="text-2xl font-bold text-white">
-                {loading ? 'Loading...' : `${stakingStats.stakingPeriod} Days`}
-              </p>
-            </div>
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-2">
+            <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <p className="text-red-400">{error}</p>
           </div>
         )}
-      </div>
 
-      {/* Formulaire de Staking */}
-      <P2PStakingForm selectedCrypto={selectedCrypto} />
+        <div className="space-y-4">
+          {testResults.map((result, index) => (
+            <div 
+              key={index}
+              className={`p-4 rounded-lg border ${
+                result.status === 'success' 
+                  ? 'border-green-500/20 bg-green-500/10' 
+                  : 'border-red-500/20 bg-red-500/10'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                {result.status === 'success' ? (
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                ) : (
+                  <AlertCircle className="w-5 h-5 text-red-500" />
+                )}
+                <h3 className="font-medium">{result.test}</h3>
+              </div>
+              
+              {result.status === 'success' ? (
+                <pre className="text-sm overflow-auto p-2 bg-black/20 rounded">
+                  {JSON.stringify(result.data, null, 2)}
+                </pre>
+              ) : (
+                <p className="text-red-400">{result.error}</p>
+              )}
+            </div>
+          ))}
+        </div>
 
-      {/* Lien vers la documentation */}
-      <div className="text-center mt-6">
-        <Link
-          href="https://p2p.org/networks/ethereum"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-orange-400 hover:text-orange-300 transition-colors text-sm inline-flex items-center gap-2"
-        >
-          Learn more about P2P.org Staking
-          <ArrowUpCircle className="h-4 w-4 rotate-45" />
-        </Link>
+        <div className="text-xs text-zinc-500">
+          Note: This endpoint requires a valid address
+        </div>
       </div>
     </div>
   );

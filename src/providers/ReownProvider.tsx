@@ -46,6 +46,10 @@ export const appKit = createAppKit({
     analytics: true,
     socials:[]
   },
+  themeVariables: {
+    '--w3m-color-mix': '#000000',
+    '--w3m-color-mix-strength': 40
+  }
   
 })
 

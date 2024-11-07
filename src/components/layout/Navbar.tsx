@@ -3,10 +3,8 @@
 import React from 'react';
 import ConnectButton from '../ConnectButton';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
-  const pathname = usePathname();
 
   return (
     <nav className="bg-black border-b border-zinc-800">
@@ -20,26 +18,13 @@ const Navbar = () => {
               </div>
             </Link>
             
-            {/* Navigation Links */}
-            <div className="hidden md:flex space-x-6">
-              <Link 
-                href="/"
-                className={`text-sm ${pathname === '/' ? 'text-orange-400' : 'text-zinc-400 hover:text-orange-400'} transition-colors`}
-              >
-                Dashboard
-              </Link>
-              <Link 
-                href="/p2p"
-                className={`text-sm ${pathname === '/p2p' ? 'text-orange-400' : 'text-zinc-400 hover:text-orange-400'} transition-colors`}
-              >
-                P2P Staking
-              </Link>
-            </div>
+           
           </div>
 
           {/* Wallet Section */}
           <div className="flex items-center space-x-4">
             <ConnectButton />
+           
           </div>
         </div>
       </div>

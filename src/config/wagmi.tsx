@@ -14,7 +14,7 @@ export const babyty = defineChain({
   nativeCurrency: {
     decimals: 18,
     name: 'Babyty',
-    symbol: 'BBY',
+    symbol: 'ETH',
   },
   rpcUrls: {
     default: {
@@ -82,5 +82,9 @@ export const appKit = createAppKit({
     analytics: true,
     swaps: true,
     onramp: true
+  },
+  themeVariables: {
+    '--w3m-color-mix': '#000000',
+    '--w3m-color-mix-strength': 40
   }
 })

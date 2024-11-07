@@ -6,6 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/Alert';
 import RewardsCard from './RewardsCard';
 import TransactionHistory from './TransactionHistory';
 import type { Transaction, RewardStats } from '@/types/staking';
+import P2PTest from './P2PTest';
 
 const StakingInterface = () => {
   const [selectedCrypto, setSelectedCrypto] = useState('ETH');
@@ -178,6 +179,9 @@ const StakingInterface = () => {
           onClaimRewards={handleClaimRewards}
           className="bg-black/40 backdrop-blur-xl border border-yellow-800 shadow-xl shadow-orange-900/10"
         />
+          
+          {/* P2P Test Section */}  
+          <P2PTest className="bg-black/40 backdrop-blur-xl border border-yellow-800 shadow-xl shadow-orange-900/10" />
 
         {/* Transaction History */}
         <TransactionHistory 
