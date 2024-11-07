@@ -1,8 +1,8 @@
-// src/components/P2PTestModule.tsx
 'use client'
 
-import React, { useState } from 'react';
-import { AlertCircle, CheckCircle, Search } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { AlertCircle, CheckCircle, Search, WalletIcon } from 'lucide-react';
+import { useAccount } from 'wagmi';
 
 interface TestResult {
   test: string;
@@ -18,21 +18,32 @@ export interface P2PTestModuleProps {
 
 const P2PTest: React.FC<P2PTestModuleProps> = ({
   className = '',
-  defaultAddress = 'tb1p892ery2yya5yejwvgrp3cru4n7yz0twx7y5gm2f6pq9rvjsgjnjsasz0s9'
+  defaultAddress = ''
 }) => {
+  const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState(false);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [address, setAddress] = useState(defaultAddress);
+  const [customAddress, setCustomAddress] = useState(defaultAddress);
+
+  // Utiliser l'adresse du wallet si connecté, sinon utiliser l'adresse personnalisée
+  const currentAddress = isConnected ? address : customAddress;
 
   const API_CONFIG = {
     BASE_URL: 'https://api.p2p.org/api/v1/babylon-btc/testnet',
     BEARER_TOKEN: process.env.NEXT_PUBLIC_P2P_BEARER_TOKEN
   };
 
+  // Mettre à jour l'adresse personnalisée quand l'adresse du wallet change
+  useEffect(() => {
+    if (isConnected && address) {
+      setCustomAddress(address);
+    }
+  }, [address, isConnected]);
+
   const runTest = async () => {
-    if (!address.trim()) {
-      setError('Please enter a BTC address');
+    if (!currentAddress?.trim()) {
+      setError('Please connect your wallet or enter a BTC address');
       return;
     }
 
@@ -42,7 +53,7 @@ const P2PTest: React.FC<P2PTestModuleProps> = ({
 
     try {
       const response = await fetch(
-        `${API_CONFIG.BASE_URL}/transaction/get-by-address/${address}`,
+        `${API_CONFIG.BASE_URL}/transaction/get-by-address/${currentAddress}`,
         {
           method: 'GET',
           headers: {
@@ -80,28 +91,46 @@ const P2PTest: React.FC<P2PTestModuleProps> = ({
         <Search className="w-6 h-6" />
         P2P Transaction Lookup
       </h2>
-      <h5 className="text-zinc-500 text-sm">https://api.p2p.org/api/v1/babylon-btc/testnet/transaction/get-by-address/{address}</h5>
+      <h5 className="text-zinc-500 text-sm">https://api.p2p.org/api/v1/babylon-btc/testnet/transaction/get-by-address/{currentAddress}</h5>
       
       <div className="bg-black/20 p-4 rounded-lg">
         <h3 className="font-medium mb-2 text-yellow-800">Configuration Status</h3>
-        <div className="flex items-center gap-2 text-white">
-          <div className={`w-2 h-2 rounded-full ${API_CONFIG.BEARER_TOKEN ? 'bg-green-500' : 'bg-red-500'}`} />
-          Bearer Token: {API_CONFIG.BEARER_TOKEN ? 'Configured' : 'Missing'}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-white">
+            <div className={`w-2 h-2 rounded-full ${API_CONFIG.BEARER_TOKEN ? 'bg-green-500' : 'bg-red-500'}`} />
+            Bearer Token: {API_CONFIG.BEARER_TOKEN ? 'Configured' : 'Missing'}
+          </div>
+          <div className="flex items-center gap-2 text-white">
+            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-yellow-500'}`} />
+            Wallet Status: {isConnected ? 'Connected' : 'Not Connected'}
+          </div>
         </div>
       </div>
       
       <div className="space-y-2">
-        <label htmlFor="address" className="block text-sm font-medium text-zinc-400">
-          Address
-        </label>
-        <input
-          id="address"
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          className="text-yellow-800 w-full p-3 bg-black/50 border border-orange-500/20 rounded-lg text-sm"
-          placeholder="Enter address"
-        />
+        {!isConnected && (
+          <>
+            <label htmlFor="address" className="block text-sm font-medium text-zinc-400">
+              Custom Address
+            </label>
+            <input
+              id="address"
+              type="text"
+              value={customAddress}
+              onChange={(e) => setCustomAddress(e.target.value)}
+              className="text-yellow-800 w-full p-3 bg-black/50 border border-orange-500/20 rounded-lg text-sm"
+              placeholder="Enter address or connect wallet"
+            />
+          </>
+        )}
+        
+        {isConnected && (
+          <div className="flex items-center gap-2 p-3 bg-black/50 border border-orange-500/20 rounded-lg">
+            <WalletIcon className="w-4 h-4 text-orange-400" />
+            <span className="text-sm text-zinc-400">Connected Address:</span>
+            <span className="text-sm text-yellow-800 font-mono">{address}</span>
+          </div>
+        )}
       </div>
       
       <button 
@@ -157,7 +186,7 @@ const P2PTest: React.FC<P2PTestModuleProps> = ({
       </div>
 
       <div className="text-xs text-zinc-500">
-        Note: This endpoint requires a valid address
+        Note: This endpoint requires a valid BTC address
       </div>
     </div>
   );

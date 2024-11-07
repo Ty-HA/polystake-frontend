@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PolyStake
 
-## Getting Started
+A modern and intuitive staking platform, enabling users to manage their crypto assets efficiently and securely.
 
-First, run the development server:
+## Technologies Used
 
+### Frontend
+* **Next.js** - Production-ready React framework
+* **TypeScript** - Static typing for JavaScript
+* **Tailwind CSS** - Utility-first CSS framework
+* **P2P** - Blockchain transaction fetching integration
+
+### Wallets & Blockchain
+* **MetaMask** - Ethereum and ERC20 tokens wallet
+* **TOMO Wallet** - Multi-chain support for BTC and ETH
+* Support for ETH, BTC, and Polygon networks
+
+## Prerequisites
+
+* Node.js (version 18.0.0 or higher)
+* npm or yarn
+* MetaMask installed in your browser
+* TOMO Wallet installed for BTC operations
+
+## Installation
+
+### Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Ty-HA/polystake-frontend.git
+cd polystake-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Multi-Wallet Support
+* MetaMask for ETH and ERC20 tokens
+* TOMO Wallet for BTC and ETH
+* Easy wallet switching
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Cross-chain Operations
+* Multi-chain staking
+* Unified asset visualization
+* Cross-chain transfers
 
-## Learn More
+### Dashboard Features
+* Consolidated multi-chain view
+* Real-time price tracking
+* Yield calculator
+* Simplified stake and unstake
+* Real-time reward tracking
+* Transaction history
 
-To learn more about Next.js, take a look at the following resources:
+### Security Features
+* Multi-signature validation
+* Malicious transaction protection
+* Customizable security alerts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Development Commands
+```bash
+# Start development server
+npm run dev
+
+# Build project for production
+npm run build
+
+# Start production server
+npm run start
+
+# Check code with ESLint
+npm run lint
+
+# Run tests
+npm run test
+```
+
+## Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. Fork the project
+2. Create your feature branch
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. Push to the branch
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
 
 ## Deploy on Vercel
+https://polystake-frontend.vercel.app/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Your Name - [@your_twitter](https://twitter.com/bthasystem)
+
+Project Link: [https://github.com/Ty-HA/polystake-frontend](https://github.com/Ty-HA/polystake-frontend)
+
+---
+
+*Developed with passion during BABYLON LABS Hackathon november 2024 Bangkok*
