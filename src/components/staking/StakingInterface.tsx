@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import React, { useState } from 'react';
 import { AlertCircle, ArrowUpCircle, Clock, Coins } from 'lucide-react';
@@ -10,7 +10,7 @@ const StakingInterface = () => {
   const [selectedCrypto, setSelectedCrypto] = useState('ETH');
   const [amount, setAmount] = useState('');
   
-  // Demo data for rewards
+  // Demo data for rewards avec une date statique
   const demoRewardStats = {
     available: {
       ETH: "0.125",
@@ -20,14 +20,14 @@ const StakingInterface = () => {
       ETH: "0.045",
       BTC: "0.0012"
     },
-    nextReward: new Date(Date.now() + 86400000).toISOString(),
+    nextReward: "2024-03-16T10:00:00.000Z", // Date statique
     totalClaimed: {
       ETH: "1.254",
       BTC: "0.0234"
     }
   };
 
-  // Demo data for transactions
+  // Demo data for transactions avec des dates statiques
   const demoTransactions = [
     {
       id: "1",
@@ -35,7 +35,7 @@ const StakingInterface = () => {
       asset: "ETH",
       amount: "2.5",
       status: "completed",
-      timestamp: new Date().toISOString(),
+      timestamp: "2024-03-15T10:00:00.000Z",
       hash: "0x1234567890abcdef1234567890abcdef12345678"
     },
     {
@@ -44,8 +44,35 @@ const StakingInterface = () => {
       asset: "ETH",
       amount: "0.125",
       status: "pending",
-      timestamp: new Date(Date.now() - 3600000).toISOString(),
+      timestamp: "2024-03-15T09:00:00.000Z",
       hash: "0xabcdef1234567890abcdef1234567890abcdef12"
+    },
+    {
+      id: "3",
+      type: "unstake",
+      asset: "ETH",
+      amount: "1.0",
+      status: "completed",
+      timestamp: "2024-03-14T10:00:00.000Z",
+      hash: "0x9876543210fedcba9876543210fedcba98765432"
+    },
+    {
+      id: "4",
+      type: "stake",
+      asset: "BTC",
+      amount: "0.5",
+      status: "failed",
+      timestamp: "2024-03-13T15:30:00.000Z",
+      hash: "0xaabbcc1234567890aabbcc1234567890aabbcc12"
+    },
+    {
+      id: "5",
+      type: "claim",
+      asset: "ETH",
+      amount: "0.075",
+      status: "completed",
+      timestamp: "2024-03-12T08:45:00.000Z",
+      hash: "0xddeeff1234567890ddeeff1234567890ddeeff12"
     }
   ];
 
@@ -62,7 +89,7 @@ const StakingInterface = () => {
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
         {/* Main Staking Section */}
-        <div className="bg-zinc-900 rounded-2xl border border-yellow-800 overflow-hidden">
+        <div className="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden">
           <div className="p-8">
             <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
               Stake Your Assets
@@ -77,7 +104,7 @@ const StakingInterface = () => {
                   <select
                     value={selectedCrypto}
                     onChange={(e) => setSelectedCrypto(e.target.value)}
-                    className="w-full p-3 bg-zinc-800 border border-yellow-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
+                    className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
                   >
                     <option value="ETH">Ethereum (ETH)</option>
                     <option value="BTC">Bitcoin (BTC)</option>
@@ -94,7 +121,7 @@ const StakingInterface = () => {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="0.0"
-                      className="w-full p-3 bg-zinc-800 border border-yellow-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
+                      className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-white"
                     />
                     <span className="absolute right-3 top-3 text-zinc-400">
                       {selectedCrypto}
@@ -112,7 +139,7 @@ const StakingInterface = () => {
                 </button>
               </div>
 
-              <div className="bg-zinc-800/50 p-6 rounded-lg space-y-4 border border-yellow-700">
+              <div className="bg-zinc-800/50 p-6 rounded-lg space-y-4 border border-zinc-700">
                 <h3 className="font-semibold text-zinc-200">Staking Information</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
@@ -149,7 +176,7 @@ const StakingInterface = () => {
         />
 
         {/* Info Alert */}
-        <Alert className="bg-zinc-900 border-yellow-800">
+        <Alert className="bg-zinc-900 border-zinc-800">
           <AlertCircle className="h-4 w-4 text-orange-400" />
           <AlertTitle className="text-zinc-200">Important Information</AlertTitle>
           <AlertDescription className="text-zinc-400">

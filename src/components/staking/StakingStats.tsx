@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import type { StakingStats as StakingStatsType } from '../../types/staking';
 import { TrendingUp, Coins, Clock } from 'lucide-react';
