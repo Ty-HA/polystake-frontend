@@ -14,6 +14,7 @@ A modern and intuitive staking platform, enabling users to manage their crypto a
 * **MetaMask** - Ethereum and ERC20 tokens wallet
 * **TOMO Wallet** - Multi-chain support for BTC and ETH
 * Support for ETH, BTC, and Polygon networks
+* **AltLayer** - decentralized protocol that facilitates the launch of native and restaked rollups with both optimistic and zk rollup stacks.
 
 ## Prerequisites
 
