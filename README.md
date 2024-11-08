@@ -19,6 +19,7 @@ https://github.com/EmanHerawy/PolyStake
 * Support for ETH, BTC, and Polygon networks
 * **AltLayer** - decentralized protocol that facilitates the launch of native and restaked rollups with both optimistic and zk rollup stacks.
 * **Babylon Labs**
+* **P2P.org** Advanced Staking Tech, Restaking, DVT, and MEV Relays at P2P.org. P2P.org offers staking services for 30+ PoS blockchains.
 
 ## Prerequisites
 
