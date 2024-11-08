@@ -1,6 +1,8 @@
 # PolyStake
 
-A modern and intuitive staking platform, enabling users to manage their crypto assets efficiently and securely.
+PolyStake is an innovative blockchain platform that combines the economic security of Bitcoin and Ethereum with advanced staking and trading features. 
+
+The platform incentivizes users to participate in network security through staking while maximizing their returns through efficient trading mechanisms.
 
 ## Technologies Used
 

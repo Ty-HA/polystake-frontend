@@ -50,9 +50,11 @@ if (!projectId) {
 // Metadata for the application
 export const metadata = {
   name: 'PolyStake',
-  description: 'Staking Platform',
-  url: 'https://polystake.xyz', // Changez pour votre domaine
-  icons: ['https://polystake.xyz/icon.png'] // Changez pour votre icône
+  description: 'PolyStake is an innovative blockchain platform that combines the economic security of Bitcoin and Ethereum with advanced staking and trading features.' 
+
+The platform incentivizes users to participate in network security through staking while maximizing their returns through efficient trading mechanisms.',
+  url: 'https://polystake-frontend.vercel.app/', // Changez pour votre domaine
+  icons: ['/PolyStake.jpg'] // Changez pour votre icône
 }
 
 // Configuration de l'adaptateur Wagmi
