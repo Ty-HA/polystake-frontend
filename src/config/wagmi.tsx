@@ -29,7 +29,7 @@ export const babyty = defineChain({
   blockExplorers: {
     default: {
       name: 'BabytyExplorer',
-      url: 'https://explorer.babyty.alt.technology',
+      url: 'https://babyty-explorer.alt.technology',
     },
   },
   contracts: {},
