@@ -4,6 +4,10 @@ PolyStake is an innovative blockchain platform that combines the economic securi
 
 The platform incentivizes users to participate in network security through staking while maximizing their returns through efficient trading mechanisms.
 
+![PolyStake Image 1](public/ps1.jpg)
+![PolyStake Image 1](public/ps2.jpg)
+![PolyStake Image 1](public/ps3.jpg)
+
 ## Technologies Used
 
 ### Frontend
